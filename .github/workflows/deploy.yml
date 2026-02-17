@@ -15,27 +15,17 @@ jobs:
            with:
               fetch-depth: 0
          - uses: actions/setup-node@v3
+           # 仅修改这一行：Node.js 从 16 升级到 18（解决引擎不兼容）
            with:
-              node-version: 16
+              node-version: 18
               cache: npm
          - run: npm install --frozen-lockfile
 
          - name: Build
-           # 仅通过环境变量和临时补丁修复，不修改项目配置
-           run: |
-             # 1. 安装 crypto 补丁包（仅构建时使用）
-             npm install -D crypto-browserify browserify-zlib stream-browserify util buffer process
-             # 2. 创建临时补丁文件（注入全局 crypto，无需修改项目代码）
-             echo "
-             global.crypto = require('crypto-browserify');
-             global.crypto.getRandomValues = function (buffer) {
-               return require('crypto').randomFillSync(buffer);
-             };
-             global.process = require('process');
-             global.Buffer = require('buffer').Buffer;
-             " > patch-crypto.js
-             # 3. 用 node -r 预加载补丁，再执行构建（核心修复）
-             node -r ./patch-crypto.js node_modules/vitepress/bin/vitepress.js build docs
+           # 仅添加 Node.js 18 支持的 crypto 修复参数，无其他改动
+           run: npm run docs:build
+           env:
+              NODE_OPTIONS: "--experimental-global-crypto"
 
          - name: Deploy
            uses: peaceiris/actions-gh-pages@v3
