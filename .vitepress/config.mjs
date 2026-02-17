@@ -48,6 +48,11 @@ export default defineConfig({
               { text: '离线部署 OnlyOffice', link: '/install/onlyoffice_install' },
               { text: '离线部署 Cloudreve', link: '/install/cloudreve_install' }
             ]
+          },
+          { text: '初始化 Cloudreve',
+            items: [
+              { text: '2. 全文搜索', link: '/init/search' }
+            ]
           }
         ]
       }
