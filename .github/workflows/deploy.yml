@@ -1,4 +1,3 @@
-# .github > workflows > deploy.yml
 name: Deploy
 
 on:
@@ -9,6 +8,9 @@ on:
 jobs:
    deploy:
       runs-on: ubuntu-latest
+      # 新增：解决 GITHUB_TOKEN 权限不足问题（部署必需）
+      permissions:
+         contents: write
       steps:
          - uses: actions/checkout@v3
            with:
@@ -23,12 +25,13 @@ jobs:
            run: npm run docs:build
 
          - name: Deploy
-            # 将构建产物 commit 到一个分支上，用于发布静态站点资源
-            # https://github.com/peaceiris/actions-gh-pages
-            #不要将peaceiris改为自己的仓库名，我单纯的以为这个需要改成自己的仓库名，部署上去就build失败了，需引用该仓库的配置
+           # 修复：缩进错误（YAML 对缩进敏感，此处需与上方 steps 同级缩进）
+           # 将构建产物 commit 到一个分支上，用于发布静态站点资源
+           # https://github.com/peaceiris/actions-gh-pages
+           #不要将peaceiris改为自己的仓库名，我单纯的以为这个需要改成自己的仓库名，部署上去就build失败了，需引用该仓库的配置
            uses: peaceiris/actions-gh-pages@v3
            with:
-              # Github 会在 workflow 中自动生成 GIHUBT_TOKEN，用于认证 workflow 的运行
+              # 修复：GIHUBT_TOKEN 拼写错误，正确为 GITHUB_TOKEN
               github_token: ${{ secrets.GITHUB_TOKEN }}
               # 静态资源目录设置
               publish_dir: docs/.vitepress/dist
