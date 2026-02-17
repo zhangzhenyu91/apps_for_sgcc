@@ -98,4 +98,4 @@ docker compose up -d
 
 ------
 
-欢迎同为国网一线班组的同僚们来信交流：[official@j1net.com](mailto:official@j1net.com)
+欢迎同为国网一线班组的同僚们来信交流：[badzhang@j1net.org](mailto:badzhang@j1net.org)

@@ -60,7 +60,7 @@ docker image prune -a -f
 docker system prune
 ```
 
-> 条件有限无法获取镜像的检一网络科技可免费提供普通版 .tar 包（为保护 Cloudreve 作者权益，Pro 版需提供授权截图可打码/其余可证明有授权的方式/i国网），邮件发送“cloudreve镜像请求”到 [official@j1net.com](mailto:official@j1net.com)
+> 条件有限无法获取镜像的检一网络科技可免费提供普通版 .tar 包（为保护 Cloudreve 作者权益，Pro 版需提供授权截图可打码/其余可证明有授权的方式/i国网），邮件发送“cloudreve镜像请求”到 [official@j1net.com](mailto:official@j1net.com) 或 [badzhang@j1net.org](mailto:badzhang@j1net.org)
 
 ### 编辑 docker-compose.yml
 
@@ -163,4 +163,4 @@ docker compose up -d
 
 ------
 
-欢迎同为国网一线班组的同僚们来信交流：[official@j1net.com](mailto:official@j1net.com)
+欢迎同为国网一线班组的同僚们来信交流：[badzhang@j1net.org](mailto:badzhang@j1net.org)
