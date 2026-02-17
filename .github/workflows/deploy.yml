@@ -15,17 +15,26 @@ jobs:
            with:
               fetch-depth: 0
          - uses: actions/setup-node@v3
-           # 仅修改这一行：Node.js 从 16 升级到 18（解决引擎不兼容）
            with:
               node-version: 18
               cache: npm
          - run: npm install --frozen-lockfile
 
          - name: Build
-           # 仅添加 Node.js 18 支持的 crypto 修复参数，无其他改动
-           run: npm run docs:build
-           env:
-              NODE_OPTIONS: "--experimental-global-crypto"
+           # 绕开 NODE_OPTIONS，直接在构建命令前注入 crypto 补丁
+           run: |
+             # 创建临时补丁文件（仅构建时使用，不修改项目代码）
+             echo "
+             const crypto = require('crypto');
+             global.crypto = {
+               getRandomValues: function (buffer) {
+                 crypto.randomFillSync(buffer);
+                 return buffer;
+               }
+             };
+             " > /tmp/patch-crypto.js
+             # 用 node -r 预加载补丁后执行构建（核心修复）
+             node -r /tmp/patch-crypto.js ./node_modules/vitepress/bin/vitepress.js build docs
 
          - name: Deploy
            uses: peaceiris/actions-gh-pages@v3
