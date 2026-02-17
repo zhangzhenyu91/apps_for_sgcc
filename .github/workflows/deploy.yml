@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master  # 触发部署的分支
+      - main  # 触发部署的分支
 
 jobs:
   deploy:
