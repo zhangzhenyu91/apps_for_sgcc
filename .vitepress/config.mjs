@@ -1,0 +1,98 @@
+import { defineConfig } from 'vitepress'
+
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
+  base: "/apps_for_sgcc/",
+  head: [["link", { rel: "icon", href: "/logo.svg" }]],
+  srcDir: "docs",
+  title: "国网一线应用部署",
+  description: "一名国网基层员工自主探索的应用部署之路",
+  themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config
+    darkModeSwitchLabel: "切换外观",
+    darkModeSwitchTitle: "切换到深色模式",
+    lightModeSwitchTitle: "切换到浅色模式",
+    outlineTitle: "目录",
+    returnToTopLabel: "返回顶部",
+    sidebarMenuLabel: "菜单",
+    
+    docFooter: {
+      prev: "上一篇", //Next page
+      next: "下一篇", //Previous page
+    },
+
+    notFound: {
+      title: "页面未找到",
+      quote: "但也许不改变航向，持续航行，也能到达你要去的彼岸",
+      linkText: "返回首页",
+    },
+
+    outline: 'deep',
+
+    logo: '/logo.svg',
+
+    nav: [
+      { text: '首页', link: '/' },
+      { text: '了解更多', link: 'https://www.j1net.com/categories/tutorial' }
+    ],
+
+    sidebar: [
+      {
+        text: '文章导航',
+        items: [
+          { text: 'Docker 环境准备', link: '/docker_install' },
+          { text: '安装部署应用',
+            items: [
+              { text: '离线部署 MySQL', link: '/install/mysql_install' },
+              { text: '离线部署 RustFS', link: '/install/rustfs_install' },
+              { text: '离线部署 OnlyOffice', link: '/install/onlyoffice_install' },
+              { text: '离线部署 Cloudreve', link: '/install/cloudreve_install' }
+            ]
+          }
+        ]
+      }
+    ],
+
+    socialLinks: [
+      {
+        icon: {
+          svg: '<svg t="1771297429372" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1751" width="200" height="200"><path d="M874.666667 181.333333H149.333333c-40.533333 0-74.666667 34.133333-74.666666 74.666667v512c0 40.533333 34.133333 74.666667 74.666666 74.666667h725.333334c40.533333 0 74.666667-34.133333 74.666666-74.666667V256c0-40.533333-34.133333-74.666667-74.666666-74.666667z m-725.333334 64h725.333334c6.4 0 10.666667 4.266667 10.666666 10.666667v25.6L512 516.266667l-373.333333-234.666667V256c0-6.4 4.266667-10.666667 10.666666-10.666667z m725.333334 533.333334H149.333333c-6.4 0-10.666667-4.266667-10.666666-10.666667V356.266667l356.266666 224c4.266667 4.266667 10.666667 4.266667 17.066667 4.266666s12.8-2.133333 17.066667-4.266666l356.266666-224V768c0 6.4-4.266667 10.666667-10.666666 10.666667z" fill="#666666" p-id="1752"></path></svg>'
+        },
+        link: 'mailto:badzhang@j1net.org',
+        // 也可以为无障碍添加一个自定义标签 (可选但推荐):
+        ariaLabel: 'email link'
+      }
+    ],
+    footer: {
+      copyright: '© 2026 坏比弓长 版权所有'
+    },
+    search: {
+      provider: "local",
+      options: {
+        translations: {
+          button: {
+            buttonText: "搜索文档",
+            buttonAriaLabel: "搜索文档",
+          },
+          modal: {
+            noResultsText: "无法找到相关结果",
+            resetButtonTitle: "清除查询条件",
+            footer: {
+              selectText: "选择",
+              navigateText: "切换",
+            },
+          },
+        },
+      },
+    },
+  },
+  
+  lang: "zh-CN",
+
+  locales: {
+    root: {
+      lang: "zh-CN",
+      label: "简体中文",
+    }
+  },
+})
