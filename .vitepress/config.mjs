@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/apps_for_sgcc/",
+//  base: "/apps_for_sgcc/",
   head: [["link", { rel: "icon", href: "/logo.svg" }]],
   srcDir: "docs",
   title: "国网一线应用部署",
