@@ -91,7 +91,7 @@ services:
       - cloudreve_data:/cloudreve/data
 
   redis:
-    image: redis:8.4.0  # 替换为redis镜像名
+    image: redis:8.6.0  # 替换为redis镜像名
     container_name: redis
     restart: always
     volumes:
