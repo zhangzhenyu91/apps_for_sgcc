@@ -64,8 +64,6 @@ services:
     environment:
       - PMA_HOST=mysql               # 关联MySQL服务名
       - PMA_PORT=3306                # MySQL端口
-      - PMA_USER=root                # 默认登录用户
-      - PMA_PASSWORD=123456          # root密码（必改，需与上面一致）
       - PMA_ARBITRARY=1              # 允许连接任意MySQL服务器
       - TZ=Asia/Shanghai             # 时区配置
       - UPLOAD_LIMIT=100M            # 上传文件大小限制
