@@ -6,7 +6,7 @@ export default defineConfig({
   head: [["link", { rel: "icon", href: "/logo.svg" }]],
   srcDir: "docs",
   title: "国网一线应用部署",
-  description: "一名国网基层员工自主探索的应用部署之路",
+  description: "一名国网基层员工自主探索的应用部署之路,文档包含了银河麒麟系统离线安装docker、离线部署MySQL、离线部署RustFS、离线部署OnlyOffice、离线部署Cloudreve、开启全文搜索等内容",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     darkModeSwitchLabel: "切换外观",
