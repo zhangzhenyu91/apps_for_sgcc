@@ -51,7 +51,7 @@ export default defineConfig({
           },
           { text: '初始化 Cloudreve',
             items: [
-              { text: '2. 全文搜索', link: '/init/search' }
+              { text: '开启全文搜索', link: '/init/search' }
             ]
           }
         ]

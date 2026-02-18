@@ -66,7 +66,7 @@ docker system prune
 
 - 创建文本文件写入以下内容并保存为 `docker-compose.yml` ：
 
-```yaml
+```yaml:line-numbers
 services:
   cloudreve:
     image: "cloudreve.azurecr.io/cloudreve/pro:4.14.1"  # 替换为cloudreve镜像名，防止出错加引号

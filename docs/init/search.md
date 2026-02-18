@@ -1,8 +1,8 @@
-# 初始化 -2- 开启全文搜索
+# 开启全文搜索
 
 ## 一、示例
 
-- 开启全文搜索，在搜索栏中搜索文件时，会一并搜索支持文档格式中的文字内容，如图搜索“吕胜”，会搜索出文件名**没有**“吕胜”但**内容包含**“吕胜”的文档：
+开启全文搜索，在搜索栏中搜索文件时，会一并搜索支持文档格式中的文字内容，如图搜索“吕胜”，会搜索出文件名**没有**“吕胜”但**内容包含**“吕胜”的文档：
 
 ![示例](/search/example.webp)
 
@@ -12,15 +12,16 @@
 
 ![Meili参数](/search/search.webp)
 
-- 进入管理后台 - **①文件系统** - **②全文搜索**，开启 **③启用全文搜索**；
-- 在 **④Meilisearch 端点** 中输入跟 Cloudreve 一起部署的 Meilisearch 地址，若是按此页文档部署的话，您可以查看 docker-compose.yml 文件中 Meilisearch 对应的端口号，再在前面加上宿主机的 IP 地址，如下示例若宿主机 IP 为 ´10.2.24.13´ 则端点应填写为：`http://10.2.24.13:7700`：
+进入管理后台 - **①文件系统** - **②全文搜索**，开启 **③启用全文搜索**
 
-```yaml
+在 **④Meilisearch 端点** 中输入跟 Cloudreve 一起部署的 Meilisearch 地址，若是按此页文档部署的话，您可以查看 docker-compose.yml 文件中 Meilisearch 对应的端口号，再在前面加上宿主机的 IP 地址，如下示例若宿主机 IP 为 ´10.2.24.13´ 则端点应填写为：`http://10.2.24.13:7700`
+
+```yaml:line-numbers=39
   meilisearch:
     image: getmeili/meilisearch:v1.35.0
     container_name: meilisearch
     restart: always
-    ports:
+    ports:  // [!code focus:6]
       # 下面一行":"前的数字即为 Meilisearch 的端口号
       - 7700:7700
     environment:
@@ -31,16 +32,16 @@
 
 ```
 
-- 在 **⑤API 密钥** 中填入 Meilisearch 的密钥，若按此页文档部署则密钥即为上方代码中 "MEILI_MASTER_KEY=" 后单引号中的字符串（替换为你自己的）；
+在 **⑤API 密钥** 中填入 Meilisearch 的密钥，若按此页文档部署则密钥即为上方代码中 "MEILI_MASTER_KEY=" 后单引号中的字符串（替换为你自己的）；
 
 ### Tika 参数设置
 
-```yaml
+```yaml:line-numbers=32
   tika:
     image: apache/tika:latest
     container_name: tika
     restart: always
-    ports:
+    ports:  // [!code focus:3]
       # 下面一行":"前的数字即为 Tika 的端口号
       - 9998:9998
 ```

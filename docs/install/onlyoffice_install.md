@@ -31,7 +31,7 @@ docker image prune
 
 - 创建文本文件写入以下内容并保存为 `docker-compose.yml` ：
 
-```yaml
+```yaml:line-numbers
 services:
   onlyoffice:
     image: moqisoft/documentserver:9.2.1

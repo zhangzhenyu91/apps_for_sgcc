@@ -1,57 +1,83 @@
 # Docker 环境准备
 
-::: info 测试设备说明
+::: info 测试环境说明
 
-测试机型：联想 开天 M99h G1t（海光 C86 3250）
+测试机处理器：i5-4460
 
-测试系统：银河麒麟 V10 SP1 2503
+测试系统镜像：银河麒麟 V10 SP1 2503
 
-最后更新时间：2026-02-16
+最后更新时间：2026-02-17
 
 :::
 
 ## 一、下载软件包
 
-https://download.docker.com/linux/
+在 [官方下载站](https://download.docker.com/linux/) 下载对应处理器架构的 `containerd.io`、`docker-ce-cli`、`docker-ce`、`docker-compose-plugin` 4个软件包（最新版本在离线安装时可能有依赖问题，建议使用较为稳定的旧版）
 
-依据测试机型路径为 `linux/debian/dists/bookworm/pool/stable/amd64/`
+::: tip 已经作者测试的包
 
-需下载以下四个安装包：
+[坏比弓长的分享｜检一网络 -- 云盘](https://cloud.j1net.com/s/LKF8)
 
-```
-containerd.io
-docker-ce-cli
-docker-ce
-docker-compose-plugin
-```
+:::
 
-示例：
+将上述4个文件拷贝至内网计算机中
 
-```
-containerd.io_2.2.1-1~debian.12~bookworm_amd64.deb
-docker-ce-cli_29.2.1-1~debian.12~bookworm_amd64.deb
-docker-ce_29.2.1-1~debian.12~bookworm_amd64.deb
-docker-compose-plugin_5.0.2-1~debian.12~bookworm_amd64.deb
-```
+![下载软件包](/docker_install/download.webp)
 
-## 二、在内网计算机中安装
+## 二、依次安装 deb 包
 
-将上述四个安装包全部拷贝到内网计算机中，在安装包所在目录中执行命令：
+打开文件所在目录，`右击` → `打开终端`
+
+![打开终端](/docker_install/openshell.webp)
+
+### 安装 containerd.io
 
 ```shell
-sudo dpkg -i containerd.io_2.2.1-1~debian.12~bookworm_amd64.deb
-
-sudo dpkg -i docker-ce-cli_29.2.1-1~debian.12~bookworm_amd64.deb
-
-sudo dpkg -i docker-ce_29.2.1-1~debian.12~bookworm_amd64.deb
-
-sudo dpkg -i docker-compose-plugin_5.0.2-1~debian.12~bookworm_amd64.deb
-
-# 验证 docker 安装
-docker -v
-# 验证 docker compose 安装
-docker compose -v
+# 注意替换安装包名称，使用作者提供的包可直接复制命令执行
+sudo dpkg -i containerd.io_1.7.27-1_amd64.deb
 ```
+
+提示输入密码时输入计算机 `登录密码` 后按 `Enter` ，弹出安全中心提醒时选择 `允许安装` ，完成后如下图
+
+![containerd安装完成](/docker_install/container.io.webp)
+
+### 安装 docker-ce-cli
+
+```shell
+sudo dpkg -i docker-ce-cli_26.1.4-1~debian.11~bullseye_amd64.deb
+```
+
+![docker-ce-cli安装完成](/docker_install/docker-ce-cli.webp)
+
+### 安装 docker-ce
+
+```shell
+sudo dpkg -i docker-ce_26.1.4-1~debian.11~bullseye_amd64.deb
+```
+
+![docker-ce安装完成](/docker_install/docker-ce.webp)
+
+### 安装 docker-compose-plugin
+
+```shell
+sudo dpkg -i docker-compose-plugin_2.40.3-1~debian.11~bullseye_amd64.deb
+```
+
+![docker-compose-plugin安装完成](/docker_install/docker-compose-plugin.webp)
+
+## 三、检查 docker 状态
+
+```shell
+systemctl status docker
+```
+
+![docker检查](/docker_install/docker-check.webp)
+
+```shell
+docker compose version
+```
+
+![docker-compose检查](/docker_install/docker-compose-check.webp)
 
 ------
 
