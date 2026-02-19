@@ -41,6 +41,7 @@ export default defineConfig({
         text: '文章导航',
         items: [
           { text: 'Docker 环境准备', link: '/docker_install' },
+          { text: '导入镜像、配置文件', link: '/images_ready' },
           { text: '安装部署应用',
             items: [
               { text: '离线部署 MySQL', link: '/install/mysql_install' },

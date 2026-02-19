@@ -30,50 +30,39 @@
 
 ![打开终端](/docker_install/openshell.webp)
 
-### 安装 containerd.io
+注意替换安装包名称，使用作者提供的包可直接复制命令执行
 
-```shell
-# 注意替换安装包名称，使用作者提供的包可直接复制命令执行
+```shell:no-line-numbers
+# containerd.io
 sudo dpkg -i containerd.io_1.7.27-1_amd64.deb
 ```
 
-提示输入密码时输入计算机 `登录密码` 后按 `Enter` ，弹出安全中心提醒时选择 `允许安装` ，完成后如下图
-
-![containerd安装完成](/docker_install/container.io.webp)
-
-### 安装 docker-ce-cli
-
-```shell
+```shell:no-line-numbers
+# docker-ce-cli
 sudo dpkg -i docker-ce-cli_26.1.4-1~debian.11~bullseye_amd64.deb
 ```
 
-![docker-ce-cli安装完成](/docker_install/docker-ce-cli.webp)
-
-### 安装 docker-ce
-
-```shell
+```shell:no-line-numbers
+# docker-ce
 sudo dpkg -i docker-ce_26.1.4-1~debian.11~bullseye_amd64.deb
 ```
 
-![docker-ce安装完成](/docker_install/docker-ce.webp)
-
-### 安装 docker-compose-plugin
-
-```shell
+```shell:no-line-numbers
+# docker-compose-plugin
 sudo dpkg -i docker-compose-plugin_2.40.3-1~debian.11~bullseye_amd64.deb
 ```
 
-![docker-compose-plugin安装完成](/docker_install/docker-compose-plugin.webp)
+提示输入密码时输入计算机 `登录密码` 后按 `Enter` ，弹出安全中心提醒时选择 `允许安装`
 
 ## 三、检查 docker 状态
 
-```shell
+```shell:no-line-numbers
 systemctl status docker
 ```
 
 ![docker检查](/docker_install/docker-check.webp)
 
-```shell
+```shell:no-line-numbers
 docker compose version
 ```
 

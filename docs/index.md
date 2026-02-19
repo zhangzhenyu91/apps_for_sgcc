@@ -18,7 +18,7 @@ hero:
       link: https://rustfs.com.cn
     - theme: alt
       text: 快速开始
-      link: /install/cloudreve_install
+      link: /images_ready
 
 features:
   - icon:
