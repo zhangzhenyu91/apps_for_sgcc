@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "国网一线应用部署"
-  text: "App Deployment<br>For SGCC"
+  name: "国网一线应用探索"
+  text: "App Exploration<br>For SGCC"
   tagline: "一线班组员工探索可用、好用的软件项目，欢迎交流"
   image:
     src: /logo.svg
