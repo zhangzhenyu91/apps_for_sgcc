@@ -18,7 +18,7 @@ hero:
       link: https://rustfs.com.cn
     - theme: alt
       text: 快速开始
-      link: /images_ready
+      link: /quick_start/images_ready
 
 features:
   - icon:

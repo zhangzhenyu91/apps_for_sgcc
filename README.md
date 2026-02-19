@@ -6,9 +6,7 @@
   <img alt="GitHub contributors" src="https://img.shields.io/github/contributors-anon/zhangzhenyu91/apps_for_sgcc">
   <img alt="GitHub License" src="https://img.shields.io/github/license/zhangzhenyu91/apps_for_sgcc">
 </p>
-<hr>
 
-## ✨ 简介
 
 项目是使用 [VitePress](https://vitepress.dev/zh/) 搭建的教程文档，旨在寻找国网一线生产办公环境可用、好用的软件、Docker 应用（前提是在班组内网计算机里有可执行性），并集部署方式、使用中的难点等整合成文档供同事们参考阅读。
 
