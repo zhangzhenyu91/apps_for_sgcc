@@ -99,4 +99,7 @@ export default defineConfig({
       label: "简体中文",
     }
   },
+  sitemap: {
+    hostname: 'https://www.j1net.org'
+  },
 })
