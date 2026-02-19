@@ -254,7 +254,7 @@ services:
 ```yaml [Cloudreve（带全文搜索）]:line-numbers
 services:
   cloudreve:
-    image: "cloudreve/cloudreve:4.14.1"  # 替换为cloudreve镜像名，防止出错加引号
+    image: cloudreve/cloudreve:4.14.1  # Pro版需替换为Pro镜像cloudreve.azurecr.io/cloudreve/pro:4.14.1
     container_name: cloudreve
     depends_on:
       - redis
@@ -325,7 +325,7 @@ volumes:
 ```yaml [Cloudreve（不带全文搜索）]:line-numbers
 services:
   cloudreve:
-    image: "cloudreve/cloudreve:4.14.1"  # 替换为cloudreve镜像名，防止出错加引号
+    image: cloudreve/cloudreve:4.14.1  # Pro版需替换为Pro镜像cloudreve.azurecr.io/cloudreve/pro:4.14.1
     container_name: cloudreve
     depends_on:
       - redis
