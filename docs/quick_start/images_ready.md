@@ -82,7 +82,7 @@ docker images
 
 ::: code-group
 
-```shell [同架构]
+```shell [同架构]:line-numbers
 # 注意修改最后一行的保存路径
 docker save \
 mysql:8.4.8 \
@@ -96,7 +96,7 @@ getmeili/meilisearch:v1.35.1 \
 -o /Users/badzhang/Downloads/apps.tar
 ```
 
-```shell [amd64]
+```shell [amd64]:line-numbers
 # 注意修改最后一行的保存路径
 docker save \
 --platform linux/amd64 \
