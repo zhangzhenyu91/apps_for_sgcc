@@ -1,4 +1,4 @@
-# MySQL 安装并创建数据库
+# 快速开始
 
 ::: info ⚠️ 注意
 
@@ -16,7 +16,7 @@
 
 **打开终端**
 
-::: warning 建议先提权
+::: tip 建议先提权
 
 执行命令时如果提示权限不足，需执行 `sudo -i` 提权，或在命令前加 `sudo`
 
@@ -52,11 +52,11 @@ docker compose logs -f
 
 ::: tip 提示
 
-密码为 mysql.yml 中应由你修改的 `MYSQL_ROOT_PASSWORD` 字段
+密码为 [`mysql.yml`](./images_ready.md#dcyml) 中应由你修改的 `MYSQL_ROOT_PASSWORD` 字段
 
-```yaml{2}:line-numbers=8
+```yaml:line-numbers=8
 environment:
-  - MYSQL_ROOT_PASSWORD=123456  # 数据库root密码（必改）
+  - MYSQL_ROOT_PASSWORD=123456  # 数据库root密码（必改） // [!code focus]
   - MYSQL_ROOT_HOST=%           # 允许所有主机访问root用户
   - TZ=Asia/Shanghai            # 时区设定
   - LANG=C.UTF-8                # 确保字符集正常
@@ -74,9 +74,9 @@ environment:
 
 如图：数据库用户名 `cloudreve` 、用户密码 `716yR9(Yu[)oM4DK` 、且创建了同名数据库 `cloudreve`
 
-::: danger ⚠️ 需与 Cloudreve 的 docker-compose.yml 保持一致
+::: tip ⚠️ 需与 Cloudreve 的 docker-compose.yml 保持一致
 
-填入到 Cloudreve 配置文件 `cloudreve.yml` 中的相应位置，顺便把 IP 改为宿主机 IP
+填入到 [`cloudreve.yml`](./images_ready.md#dcyml) 中的相应位置，顺便把 IP 改为宿主机 IP
 
 ```yaml:line-numbers=10
 environment:
@@ -90,3 +90,66 @@ environment:
   - CR_CONF_Redis.Server=redis:6379
 ```
 
+:::
+
+## 启动 Cloudreve
+
+**打开终端**
+
+::: tip 建议先提权
+
+执行命令时如果提示权限不足，需执行 `sudo -i` 提权，或在命令前加 `sudo`
+
+:::
+
+::: code-group
+
+```shell [社区版]
+# 创建安装目录和持久化路径
+mkdir -p /opt/cloudreve/data /opt/cloudreve/redis/data /opt/cloudreve/meili/data
+
+# 拷贝 docker-compose.yml 文件
+cp /data/usershare/cloudreve.yml /opt/cloudreve/docker-compose.yml
+
+# 进入安装目录
+cd /opt/cloudreve
+
+# 启动
+docker compose up -d
+
+# （可选）查看实时日志
+docker compose logs -f
+```
+
+```shell [Pro 版]
+# 创建安装目录和持久化路径
+mkdir -p /opt/cloudreve/data /opt/cloudreve/redis/data /opt/cloudreve/meili/data
+
+# 拷贝 docker-compose.yml 文件
+cp /data/usershare/cloudreve.yml /opt/cloudreve/docker-compose.yml
+
+# 进入安装目录
+cd /opt/cloudreve
+
+# 设置授权密钥和离线密钥
+export CR_LICENSE_KEY="你的授权密钥"
+export CR_OFFLINE_LICENSE="你的离线许可证密钥"
+
+# 启动
+docker compose up -d
+
+# （可选）查看实时日志
+docker compose logs -f
+```
+
+:::
+
+浏览器访问 [127.0.0.1](http://127.0.0.1) 打开 Cloudreve （http协议80端口可以省略）
+
+::: tip 其他局域网计算机访问时需使用宿主机 IP
+
+例：[http://192.168.1.165](http://192.168.1.165)
+
+:::
+
+点击 `立即注册` ，首个注册的用户即为 `管理员` ，经作者测试，可能由于公司内网邮箱 SMTP 连接方式不设加密等原因，Cloudreve 暂时无法使用内网邮箱 SMTP 服务发送各类通知邮件，等待开发团队优化吧 🙏

@@ -41,10 +41,10 @@ export default defineConfig({
         text: '文章导航',
         items: [
           { text: 'Docker 环境准备', link: '/docker_install' },
-          { text: '快速开始',
+          { text: '基础组件',
             items: [
               { text: '导入镜像、配置文件', link: '/quick_start/images_ready' },
-              { text: '安装、创建数据库', link: '/quick_start/create_db' },
+              { text: '快速开始', link: '/quick_start/' },
             ]
           },
           { text: '初始化 Cloudreve',

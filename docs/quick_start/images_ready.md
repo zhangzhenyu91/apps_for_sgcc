@@ -10,7 +10,7 @@
 
 :::
 
-## 一、拉取并导出镜像
+## 拉取并导出镜像
 
 ### 拉取镜像
 
@@ -126,11 +126,11 @@ getmeili/meilisearch:v1.35.1 \
 -o /Users/badzhang/Downloads/apps.tar
 ```
 
-## 二、编写 docker-compose.yml
+## 编写 docker-compose.yml {#dcyml}
 
 创建 **4** 个文本文件分别命名为 `mysql.yml` `rustfs.yml` `onlyoffice.yml` `cloudreve.yml`
 
-::: warning 叠甲保护
+::: tip 叠甲保护
 
 小白建议跟着作者命名，后续可以直接复制命令执行，专业人士轻喷 QAQ
 
@@ -251,10 +251,10 @@ services:
     stdin_open: true
 ```
 
-```yaml [Cloudreve（带全文搜索）]:line-numbers
+```yaml [Cloudreve]:line-numbers
 services:
   cloudreve:
-    image: cloudreve/cloudreve:4.14.1  # Pro版需替换为Pro镜像cloudreve.azurecr.io/cloudreve/pro:4.14.1
+    image: cloudreve/cloudreve:4.14.1
     container_name: cloudreve
     depends_on:
       - redis
@@ -265,13 +265,11 @@ services:
       - TZ=Asia/Shanghai
       - CR_CONF_Database.Type=mysql
       - CR_CONF_Database.Host=127.0.0.1   # 此处需修改为MySQL数据库地址（必改）
-      - CR_CONF_Database.User=root        # 此处需修改为数据库用户名（必改）
+      - CR_CONF_Database.User=cloudreve   # 此处需修改为数据库用户名（必改）建议用root之外的用户
       - CR_CONF_Database.Password=123456  # 此处需修改为数据库密码（必改）
       - CR_CONF_Database.Name=cloudreve   # 此处需修改为数据库名（必改）
-      - CR_CONF_Database.Port=3306        # 此处需修改为数据库端口（必改）
+      - CR_CONF_Database.Port=3306        # 数据库端口（mysql默认为3306）
       - CR_CONF_Redis.Server=redis:6379   # 本配置包含Redis部署，如使用外部Redis才需修改此项
-      - CR_LICENSE_KEY=                   # 授权密钥，社区版可删除此行（Pro版必填）
-      - CR_OFFLINE_LICENSE=               # 离线许可证，社区版可删除此行（Pro版必填）
     volumes:
       - cloudreve_data:/cloudreve/data
 
@@ -322,10 +320,10 @@ volumes:
       device: /opt/cloudreve/meili/data  # meilisearch持久化目录
 ```
 
-```yaml [Cloudreve（不带全文搜索）]:line-numbers
+```yaml [Cloudreve Pro（需购买授权）]:line-numbers
 services:
   cloudreve:
-    image: cloudreve/cloudreve:4.14.1  # Pro版需替换为Pro镜像cloudreve.azurecr.io/cloudreve/pro:4.14.1
+    image: "cloudreve.azurecr.io/cloudreve/pro:4.14.1"
     container_name: cloudreve
     depends_on:
       - redis
@@ -335,14 +333,14 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - CR_CONF_Database.Type=mysql
-      - CR_CONF_Database.Host=127.0.0.1   # 此处需修改为MySQL数据库地址（必改）
-      - CR_CONF_Database.User=root        # 此处需修改为数据库用户名（必改）
-      - CR_CONF_Database.Password=123456  # 此处需修改为数据库密码（必改）
-      - CR_CONF_Database.Name=cloudreve   # 此处需修改为数据库名（必改）
-      - CR_CONF_Database.Port=3306        # 此处需修改为数据库端口（必改）
-      - CR_CONF_Redis.Server=redis:6379   # 本配置包含Redis部署，如使用外部Redis才需修改此项
-      - CR_LICENSE_KEY=                   # 授权密钥，社区版可删除此行（Pro版必填）
-      - CR_OFFLINE_LICENSE=               # 离线许可证，社区版可删除此行（Pro版必填）
+      - CR_CONF_Database.Host=127.0.0.1           # 此处需修改为MySQL数据库地址（必改）
+      - CR_CONF_Database.User=cloudreve           # 此处需修改为数据库用户名（必改）建议用root之外的用户
+      - CR_CONF_Database.Password=123456          # 此处需修改为数据库密码（必改）
+      - CR_CONF_Database.Name=cloudreve           # 此处需修改为数据库名（必改）
+      - CR_CONF_Database.Port=3306                # 数据库端口（mysql默认为3306）
+      - CR_CONF_Redis.Server=redis:6379           # 本配置包含Redis部署，如使用外部Redis才需修改此项
+      - CR_LICENSE_KEY=${CR_LICENSE_KEY}          # 授权密钥
+      - CR_OFFLINE_LICENSE=&{CR_OFFLINE_LICENSE}  # 离线许可证
     volumes:
       - cloudreve_data:/cloudreve/data
 
@@ -353,6 +351,24 @@ services:
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
+
+  tika:
+    image: apache/tika:3.2.3.0  # 替换为tika镜像名
+    container_name: tika
+    restart: always
+    ports:
+      - 9998:9998  # tika映射端口
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.35.1  # 替换为meilisearch镜像名
+    container_name: meilisearch
+    restart: always
+    ports:
+      - 7700:7700  # meilisearch映射端口
+    environment:
+      - MEILI_MASTER_KEY='TmDSKZhcoEMzTt3STPhRQVRxPEVZw7m2TymKwKhs_YaL3GF'  # 请替换为实际的API密钥
+    volumes:
+      - meili_data:/meili_data
 
 volumes:
   cloudreve_data:
@@ -367,8 +383,14 @@ volumes:
       type: none
       o: bind
       device: /opt/cloudreve/redis/data  # redis持久化目录
+  meili_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/cloudreve/meili/data  # meilisearch持久化目录
 ```
 
-## 三、导入文件
+## 导入文件
 
 如按上述步骤执行，应有 **1** 个镜像包和 **4** 个配置文件 `apps.tar` `mysql.yml` `rusts.yml` `onlyoffice.yml` `cloudreve.yml` ，全部拷贝至目标内网计算机中，至此准备工作就全部完成啦，后续步骤全部在目标计算机中执行
