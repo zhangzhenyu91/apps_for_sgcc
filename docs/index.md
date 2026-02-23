@@ -21,20 +21,23 @@ hero:
       link: /quick_start/
 
 features:
-  - icon:
-      src: /cloudreve.svg
-      width: 32px
-    title: Cloudreve
-    details: 性能极佳的私有部署网盘，配合 RustFS 整合多台计算机磁盘，任一电脑即可访问、搜索所有文件，最新更新还可搜索文档内数据
-  - icon:
-      src: /dzzoffice.png
-      width: 32px
-    title: DzzOffice
-    details: 虽弃用，但仍是作者心中很好用的团队协作网盘，团队空间共享比 Cloudreve 优秀，但后者极佳的性能表现让作者很心水，最终选择放弃 DzzOffice 方案
-  - icon:
-      src: /onlyoffice.svg
-      width: 32px
-    title: OnlyOffice
+  - icon: 💾
+    title: 存储硬件整合
+    details: 在每台计算机中单独部署 RustFS，在性能较强的计算机中部署网盘服务，利用 S3 协议连接，整合硬盘资源，实现任一计算机均可访问全部资源
+  - icon: 📝
+    title: 在线协同编辑
+    details: 通过 OnlyOffice（中国版）与网盘集成，实现内网环境中的在线文档协作，无需二次整合，直接在同一文档中修改
+  - icon: 📤
+    title: 高效文件收发
+    details: 传统大文件发送依托非局域网中的邮件服务器，上传、下载非常耗时，利用网盘分享链接实现局域网内传输，速度大大提升
+  - icon: 🔍
+    title: 文档内容搜索
+    details: 借助 Tika 等应用，网盘
+  - icon: 🌀
+    title: 方便小白部署
+    details: 配合 Cloudreve、DzzOffice、Seafile 等可在内网环境中实现在线协作，作者想尝试 Office Online Server 但能力有限
+  - icon: 📩
+    title: 内网收取资源
     details: 配合 Cloudreve、DzzOffice、Seafile 等可在内网环境中实现在线协作，作者想尝试 Office Online Server 但能力有限
 ---
 
