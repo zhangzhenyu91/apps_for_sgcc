@@ -11,15 +11,17 @@ hero:
     alt: 背景图
   actions:
     - theme: brand
-      text: Cloudreve 官网
-      link: https://cloudreve.org
-    - theme: brand
-      text: RustFS 官网
-      link: https://rustfs.com.cn
-    - theme: alt
       text: 快速开始
       link: /quick_start/
-
+    - theme: alt
+      text: 可道云官网
+      link: https://kodcloud.com
+    - theme: alt
+      text: Cloudreve 官网
+      link: https://cloudreve.org
+    - theme: alt
+      text: RustFS 官网
+      link: https://rustfs.com.cn
 features:
   - icon: 💾
     title: 存储硬件整合
@@ -32,12 +34,11 @@ features:
     details: 传统大文件发送依托非局域网中的邮件服务器，上传、下载非常耗时，利用网盘分享链接实现局域网内传输，速度大大提升
   - icon: 🔍
     title: 文档内容搜索
-    details: 借助 Tika 等应用，网盘
+    details: 借助 Tika 等应用，可实现搜索时连带文档内容一起搜索，在忘记文件名的情况下也可根据文档内容搜索文件
   - icon: 🌀
     title: 方便小白部署
-    details: 配合 Cloudreve、DzzOffice、Seafile 等可在内网环境中实现在线协作，作者想尝试 Office Online Server 但能力有限
+    details: 文档编写基本涵盖每一步，无需理解，按步骤执行即可完成安装部署<br>演示测试：银河麒麟 V10 SP1 2503
   - icon: 📩
     title: 内网收取资源
-    details: 配合 Cloudreve、DzzOffice、Seafile 等可在内网环境中实现在线协作，作者想尝试 Office Online Server 但能力有限
+    details: 文档中包含的镜像tar包、docker-compose.yml示例文件均可联系作者获取，支持国网内网邮件发送<br>联系邮箱：badzhang@j1net.org
 ---
-

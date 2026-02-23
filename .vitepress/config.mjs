@@ -68,7 +68,7 @@ export default defineConfig({
       }
     ],
     footer: {
-      copyright: '© 2026 坏比弓长 版权所有'
+      copyright: '© 2026 坏比弓长'
     },
     search: {
       provider: "local",
