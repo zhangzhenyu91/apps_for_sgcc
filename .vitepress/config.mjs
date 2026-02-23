@@ -33,28 +33,62 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
+      {
+        text: '部署文档',
+        items: [
+          { text: 'Cloudreve 部署', link: '/cloudreve' },
+          { text: '可道云 部署', link: '/kodbox' },
+        ]
+      },
+      {
+        text: '官网',
+        items: [
+          { text: 'Cloudreve', link: 'https://cloudreve.org' },
+          { text: '可道云', link: 'https://www.kodcloud.com' },
+          { text: 'RustFS', link: 'https://rustfs.com.cn' },
+        ]
+      },
       { text: '了解更多', link: 'https://www.j1net.com/categories/tutorial' }
     ],
 
-    sidebar: [
-      {
-        text: '文章导航',
-        items: [
-          { text: 'Docker 环境准备', link: '/docker_install' },
-          { text: '基础组件',
-            items: [
-              { text: '导入镜像、配置文件', link: '/quick_start/images_ready' },
-              { text: '快速开始', link: '/quick_start/' },
-            ]
-          },
-          { text: '初始化 Cloudreve',
-            items: [
-              { text: '开启全文搜索', link: '/init/search' }
-            ]
-          }
-        ]
-      }
-    ],
+    sidebar: {
+      '/cloudreve/': [
+        {
+          text: 'Cloudreve 部署流程',
+          items: [
+            { text: 'Docker 环境准备', link: '/cloudreve/docker_install' },
+            { 
+              text: '基础组件',
+              items: [
+                { text: '导入镜像、配置文件', link: '/cloudreve/images_ready' },
+                { text: '快速开始', link: '/cloudreve/' },
+              ]
+            },
+            { 
+              text: '初始化 Cloudreve',
+              items: [
+                { text: '开启全文搜索', link: '/cloudreve/search' }
+              ]
+            }
+          ]
+        }
+      ],
+      '/kodbox/': [
+        {
+          text: '可道云 部署流程',
+          items: [
+            { text: 'Docker 环境准备', link: '/kodbox/docker_install' },
+            { 
+              text: '基础组件',
+              items: [
+                { text: '导入镜像、配置文件', link: '/kodbox/images_ready' },
+                { text: '快速开始', link: '/kodbox/' },
+              ]
+            },
+          ]
+        }
+      ],
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/zhangzhenyu91/apps_for_sgcc' },

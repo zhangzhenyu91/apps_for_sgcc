@@ -11,17 +11,11 @@ hero:
     alt: 背景图
   actions:
     - theme: brand
-      text: 快速开始
-      link: /quick_start/
+      text: 快速开始（Cloudreve）
+      link: /cloudreve/
     - theme: alt
-      text: 可道云官网
-      link: https://kodcloud.com
-    - theme: alt
-      text: Cloudreve 官网
-      link: https://cloudreve.org
-    - theme: alt
-      text: RustFS 官网
-      link: https://rustfs.com.cn
+      text: 快速开始（可道云）
+      link: /kodbox/
 features:
   - icon: 💾
     title: 存储硬件整合
