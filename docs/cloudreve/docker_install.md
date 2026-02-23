@@ -16,7 +16,9 @@
 
 ::: tip 已经作者测试的包
 
-[坏比弓长的分享｜检一网络 -- 云盘](https://cloud.j1net.com/s/LKF8)
+分享名称: Docker 软件包
+分享链接: [https://online.j1net.com/#s/EB1sB93q](https://online.j1net.com/#s/EB1sB93q)
+提取密码: g915Y
 
 :::
 
