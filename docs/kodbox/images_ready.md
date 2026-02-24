@@ -18,55 +18,46 @@
 
 ::: code-group
 
-```shell [同架构]
-# 拉取镜像（全部）
+```shell [全文搜索、缩略图生成]
+# 拉取镜像
 docker pull mysql:8.4.8 ; \
 docker pull phpmyadmin:5.2.3 ; \
 docker pull rustfs/rustfs:1.0.0-alpha.83 ; \
 docker pull moqisoft/documentserver:9.2.1 ; \
 docker pull redis:8.6.0 ; \
-docker pull cloudreve/cloudreve:4.14.1 ; \
-docker pull apache/tika:3.2.3.0 ; \
-docker pull getmeili/meilisearch:v1.35.1
+docker pull crpi-ovd9bsoyyytwb7vw.cn-beijing.personal.cr.aliyuncs.com/badzhang/kodbox-with-java:latest
+docker pull registry.cn-hangzhou.aliyuncs.com/kodcloud/imaginary
 ```
 
-```shell [amd64]
-# 拉取镜像（全部）并添加参数指定拉取 amd64 架构
-docker pull --platform linux/amd64 mysql:8.4.8 ; \
-docker pull --platform linux/amd64 phpmyadmin:5.2.3 ; \
-docker pull --platform linux/amd64 rustfs/rustfs:1.0.0-alpha.83 ; \
-docker pull --platform linux/amd64 moqisoft/documentserver:9.2.1 ; \
-docker pull --platform linux/amd64 redis:8.6.0 ; \
-docker pull --platform linux/amd64 cloudreve/cloudreve:4.14.1 ; \
-docker pull --platform linux/amd64 apache/tika:3.2.3.0 ; \
-docker pull --platform linux/amd64 getmeili/meilisearch:v1.35.1
-```
-
-```shell [arm64]
-# 拉取镜像（全部）并添加参数指定拉取 arm64 架构
-docker pull --platform linux/arm64 mysql:8.4.8 ; \
-docker pull --platform linux/arm64 phpmyadmin:5.2.3 ; \
-docker pull --platform linux/arm64 rustfs/rustfs:1.0.0-alpha.83 ; \
-docker pull --platform linux/arm64 moqisoft/documentserver:9.2.1 ; \
-docker pull --platform linux/arm64 redis:8.6.0 ; \
-docker pull --platform linux/arm64 cloudreve/cloudreve:4.14.1 ; \
-docker pull --platform linux/arm64 apache/tika:3.2.3.0 ; \
-docker pull --platform linux/arm64 getmeili/meilisearch:v1.35.1
+```shell [无附加项]
+# 拉取镜像
+docker pull mysql:8.4.8 ; \
+docker pull phpmyadmin:5.2.3 ; \
+docker pull rustfs/rustfs:1.0.0-alpha.83 ; \
+docker pull moqisoft/documentserver:9.2.1 ; \
+docker pull redis:8.6.0 ; \
+docker pull registry.cn-hangzhou.aliyuncs.com/kodcloud/kodbox:latest
 ```
 
 :::
 
-以上包含 数据库（MySQL）、后端存储（RustFS）、在线协作（OnlyOffice）、Cloudreve（附带全文搜索） 四个模块所需的全部镜像，可以修改 `:` 后的版本号，如需单独拉取某一模块的镜像参考下表删去其余命令即可，也可一行一行的执行（删去后面的 `; \` ）
+::: tip ⚠️ 注意
+
+不同架构拉取请参考 Cloudreve 文档中的 [镜像拉取](/cloudreve/images_ready#dockerpull) ，`全文搜索、缩略图生成` 版本中的 `kodbox` 镜像为作者基于官方镜像重新构建，目前仅上传了 `amd64` 版，如需其他版本可以自行构建或联系作者
+
+:::
+
+以上包含 数据库（MySQL）、后端存储（RustFS）、在线协作（OnlyOffice）、可道云（kodbox） 四个模块所需的全部镜像，可以修改 `:` 后的版本号，如需单独拉取某一模块的镜像参考下表删去其余命令即可，也可一行一行的执行（删去后面的 `; \` ）
 
 ::: details 各模块所需镜像
 
-| 模块                           | 所需镜像                                                     |
-| ------------------------------ | ------------------------------------------------------------ |
-| 数据库<br>（MySQL）            | `mysql:8.4.8` `phpmyadmin:5.2.3`                             |
-| 后端存储（RustFS）             | `rustfs/rustfs:1.0.0-alpha.83`                               |
-| 在线协作<br/>（OnlyOffice）    | `moqisoft/documentserver:9.2.1`                              |
-| Cloudreve<br/>（附带全文搜索） | `redis:8.6.0` `cloudreve/cloudreve:4.14.1` `apache/tika:3.2.3.0` `getmeili/meilisearch:v1.35.1` |
-| Cloudreve<br/>（不带全文搜索） | `redis:8.6.0` `cloudreve/cloudreve:4.14.1`                   |
+| 模块                              | 所需镜像                                                     |
+| --------------------------------- | ------------------------------------------------------------ |
+| 数据库<br>（MySQL）               | `mysql:8.4.8` `phpmyadmin:5.2.3`                             |
+| 后端存储（RustFS）                | `rustfs/rustfs:1.0.0-alpha.83`                               |
+| 在线协作<br/>（OnlyOffice）       | `moqisoft/documentserver:9.2.1`                              |
+| 可道云kodbox<br/>（附带全文搜索） | `redis:8.6.0` `badzhang/kodbox-with-java:latest` `kodcloud/imaginary` |
+| 可道云kodbox<br/>（不带全文搜索） | `redis:8.6.0` `kodcloud/kodbox`                              |
 
 :::
 
@@ -80,9 +71,7 @@ docker images
 
 将刚下载的镜像导出到指定位置，例如 `/Users/badzhang/Downloads` ，请根据上一步下载的镜像数量、版本号适当修改或直接复制
 
-::: code-group
-
-```shell [同架构]:line-numbers
+```shell:line-numbers
 # 注意修改最后一行的保存路径
 docker save \
 mysql:8.4.8 \
@@ -90,45 +79,14 @@ phpmyadmin:5.2.3 \
 rustfs/rustfs:1.0.0-alpha.83 \
 moqisoft/documentserver:9.2.1 \
 redis:8.6.0 \
-cloudreve/cloudreve:4.14.1 \
-apache/tika:3.2.3.0 \
-getmeili/meilisearch:v1.35.1 \
--o /Users/badzhang/Downloads/apps.tar
-```
-
-```shell [amd64]:line-numbers
-# 注意修改最后一行的保存路径
-docker save \
---platform linux/amd64 \
-mysql:8.4.8 \
-phpmyadmin:5.2.3 \
-rustfs/rustfs:1.0.0-alpha.83 \
-moqisoft/documentserver:9.2.1 \
-redis:8.6.0 \
-cloudreve/cloudreve:4.14.1 \
-apache/tika:3.2.3.0 \
-getmeili/meilisearch:v1.35.1 \
--o /Users/badzhang/Downloads/apps.tar
-```
-
-```shell [arm64]:line-numbers
-# 注意修改最后一行的保存路径
-docker save \
---platform linux/arm64 \
-mysql:8.4.8 \
-phpmyadmin:5.2.3 \
-rustfs/rustfs:1.0.0-alpha.83 \
-moqisoft/documentserver:9.2.1 \
-redis:8.6.0 \
-cloudreve/cloudreve:4.14.1 \
-apache/tika:3.2.3.0 \
-getmeili/meilisearch:v1.35.1 \
+crpi-ovd9bsoyyytwb7vw.cn-beijing.personal.cr.aliyuncs.com/badzhang/kodbox-with-java:latest \
+registry.cn-hangzhou.aliyuncs.com/kodcloud/imaginary \
 -o /Users/badzhang/Downloads/apps.tar
 ```
 
 ## 编写 docker-compose.yml {#dcyml}
 
-创建 **4** 个文本文件分别命名为 `mysql.yml` `rustfs.yml` `onlyoffice.yml` `cloudreve.yml`
+创建 **4** 个文本文件分别命名为 `mysql.yml` `rustfs.yml` `onlyoffice.yml` `kodbox.yml`
 
 ::: tip 叠甲保护
 
@@ -236,8 +194,8 @@ services:
     privileged: true
     environment:
       - ALLOW_PRIVATE_IP_ADDRESS=true  # 允许内网地址
-      - JWT_ENABLED=true               # 开启JWT密钥验证
-      - JWT_SECRET=secret_m5fR6A       # JWT密钥设置（必改）
+      - JWT_ENABLED=false              # 可道云不支持JWT验证
+      - JWT_SECRET=secret_m5fR6A       # JWT密钥设置
       - JWT_HEADER=Authorization       # 指定客户端传递JWT令牌的HTTP请求头名称
       - JWT_IN_BODY=true               # 允许在HTTP请求体中传递JWT令牌
       - WOPI_ENABLED=true              # 开启WOPI协议支持
