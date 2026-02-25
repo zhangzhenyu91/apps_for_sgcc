@@ -104,6 +104,8 @@ services:
     image: mysql:8.4.8
     container_name: mysql
     restart: always
+    networks:
+      - app-net
     ports:
       - "3306:3306"
     environment:
@@ -124,6 +126,8 @@ services:
     image: phpmyadmin:5.2.3
     container_name: phpmyadmin
     restart: always
+    networks:
+      - app-net
     ports:
       - "8080:80"
     environment:
@@ -143,6 +147,9 @@ volumes:
       type: none
       o: bind
       device: /opt/mysql/data  # mysql持久化目录，可自行修改
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [RustFS]:line-numbers
@@ -152,6 +159,8 @@ services:
     container_name: rustfs
     security_opt:
       - "no-new-privileges:true"  # 禁止容器提升自身权限
+    networks:
+      - app-net
     ports:
       - "9000:9000"  # S3 API 对外端口
       - "9001:9001"  # 控制台对外端口
@@ -165,14 +174,10 @@ services:
       - RUSTFS_ACCESS_KEY=admin                # 控制台账号（必改）
       - RUSTFS_SECRET_KEY=123456               # 控制台密码（必改）
       - RUSTFS_OBS_LOGGER_LEVEL=info           # 日志级别
-
     volumes:
       - ./deploy/data/pro:/data  # 持久化配置目录
       - ./deploy/logs:/app/logs  # 日志目录
       - /data/usershare/共享目录:/data/rustfs0  # 存储目录（必改）
-
-    networks:
-      - rustfs-network
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "sh", "-c", "curl -f http://localhost:9000/health && curl -f http://localhost:9001/health"]
@@ -180,6 +185,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [OnlyOffice]:line-numbers
@@ -187,6 +195,8 @@ services:
   onlyoffice:
     image: moqisoft/documentserver:9.2.1
     container_name: onlyoffice
+    networks:
+      - app-net
     ports:
       - "40156:80"    # 服务端口
       - "40157:8000"  # 授权查看端口（无API需求可以无视）
@@ -207,6 +217,9 @@ services:
       - /sys/class:/host/sys/class
     tty: true
     stdin_open: true
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [Cloudreve]:line-numbers
@@ -214,6 +227,8 @@ services:
   cloudreve:
     image: cloudreve/cloudreve:4.14.1
     container_name: cloudreve
+    networks:
+      - app-net
     depends_on:
       - redis
     restart: always

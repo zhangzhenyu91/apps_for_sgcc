@@ -23,6 +23,9 @@
 :::
 
 ```shell
+# 创建网络 app-net
+docker network create app-net
+
 # 导入镜像包
 docker load -i /data/usershare/apps.tar
 

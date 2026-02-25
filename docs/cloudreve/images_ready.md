@@ -145,6 +145,8 @@ services:
   mysql:
     image: mysql:8.4.8
     container_name: mysql
+    networks:
+      - app-net
     restart: always
     ports:
       - "3306:3306"
@@ -165,6 +167,8 @@ services:
   phpmyadmin:
     image: phpmyadmin:5.2.3
     container_name: phpmyadmin
+    networks:
+      - app-net
     restart: always
     ports:
       - "8080:80"
@@ -185,6 +189,10 @@ volumes:
       type: none
       o: bind
       device: /opt/mysql/data  # mysql持久化目录，可自行修改
+
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [RustFS]:line-numbers
@@ -214,7 +222,7 @@ services:
       - /data/usershare/共享目录:/data/rustfs0  # 存储目录（必改）
 
     networks:
-      - rustfs-network
+      - app-net
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "sh", "-c", "curl -f http://localhost:9000/health && curl -f http://localhost:9001/health"]
@@ -222,6 +230,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [OnlyOffice]:line-numbers
@@ -229,6 +240,8 @@ services:
   onlyoffice:
     image: moqisoft/documentserver:9.2.1
     container_name: onlyoffice
+    networks:
+      - app-net
     ports:
       - "40156:80"    # 服务端口
       - "40157:8000"  # 授权查看端口（无API需求可以无视）
@@ -249,6 +262,9 @@ services:
       - /sys/class:/host/sys/class
     tty: true
     stdin_open: true
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [Cloudreve]:line-numbers
@@ -256,6 +272,8 @@ services:
   cloudreve:
     image: cloudreve/cloudreve:4.14.1
     container_name: cloudreve
+    networks:
+      - app-net
     depends_on:
       - redis
     restart: always
@@ -276,6 +294,8 @@ services:
   redis:
     image: redis:8.6.0  # 替换为redis镜像名
     container_name: redis
+    networks:
+      - app-net
     restart: always
     volumes:
       - redis_data:/data
@@ -284,6 +304,8 @@ services:
   tika:
     image: apache/tika:3.2.3.0  # 替换为tika镜像名
     container_name: tika
+    networks:
+      - app-net
     restart: always
     ports:
       - 9998:9998  # tika映射端口
@@ -291,6 +313,8 @@ services:
   meilisearch:
     image: getmeili/meilisearch:v1.35.1  # 替换为meilisearch镜像名
     container_name: meilisearch
+    networks:
+      - app-net
     restart: always
     ports:
       - 7700:7700  # meilisearch映射端口
@@ -318,6 +342,9 @@ volumes:
       type: none
       o: bind
       device: /opt/cloudreve/meili/data  # meilisearch持久化目录
+networks:
+  app-net:
+    external: true
 ```
 
 ```yaml [Cloudreve Pro（需购买授权）]:line-numbers
@@ -325,6 +352,8 @@ services:
   cloudreve:
     image: "cloudreve.azurecr.io/cloudreve/pro:4.14.1"
     container_name: cloudreve
+    networks:
+      - app-net
     depends_on:
       - redis
     restart: always
@@ -347,6 +376,8 @@ services:
   redis:
     image: redis:8.6.0  # 替换为redis镜像名
     container_name: redis
+    networks:
+      - app-net
     restart: always
     volumes:
       - redis_data:/data
@@ -355,6 +386,8 @@ services:
   tika:
     image: apache/tika:3.2.3.0  # 替换为tika镜像名
     container_name: tika
+    networks:
+      - app-net
     restart: always
     ports:
       - 9998:9998  # tika映射端口
@@ -362,6 +395,8 @@ services:
   meilisearch:
     image: getmeili/meilisearch:v1.35.1  # 替换为meilisearch镜像名
     container_name: meilisearch
+    networks:
+      - app-net
     restart: always
     ports:
       - 7700:7700  # meilisearch映射端口
@@ -389,6 +424,9 @@ volumes:
       type: none
       o: bind
       device: /opt/cloudreve/meili/data  # meilisearch持久化目录
+networks:
+  app-net:
+    external: true
 ```
 
 ## 导入文件
