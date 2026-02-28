@@ -431,4 +431,4 @@ networks:
 
 ## 导入文件
 
-如按上述步骤执行，应有 **1** 个镜像包和 **4** 个配置文件 `apps.tar` `mysql.yml` `rusts.yml` `onlyoffice.yml` `cloudreve.yml` ，全部拷贝至目标内网计算机中，至此准备工作就全部完成啦，后续步骤全部在目标计算机中执行
+如按上述步骤执行，应有 **1** 个镜像包和 **4** 个配置文件 `apps.tar` `mysql.yml` `rustfs.yml` `onlyoffice.yml` `cloudreve.yml` ，全部拷贝至目标内网计算机中，至此准备工作就全部完成啦，后续步骤全部在目标计算机中执行

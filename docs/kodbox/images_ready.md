@@ -131,8 +131,6 @@ services:
     ports:
       - "8080:80"
     environment:
-      - PMA_HOST=mysql              # 关联MySQL服务名
-      - PMA_PORT=3306               # MySQL端口
       - PMA_ARBITRARY=1             # 允许连接任意MySQL服务器
       - TZ=Asia/Shanghai            # 时区配置
       - UPLOAD_LIMIT=100M           # 上传文件大小限制
@@ -178,6 +176,7 @@ services:
       - ./deploy/data/pro:/data  # 持久化配置目录
       - ./deploy/logs:/app/logs  # 日志目录
       - /data/usershare/共享目录:/data/rustfs0  # 存储目录（必改）
+    # - /其他目录:/data/rustfs1 如有其他需要挂载的以此类推，没有可删除此行
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "sh", "-c", "curl -f http://localhost:9000/health && curl -f http://localhost:9001/health"]
@@ -366,4 +365,4 @@ volumes:
 
 ## 导入文件
 
-如按上述步骤执行，应有 **1** 个镜像包和 **4** 个配置文件 `apps.tar` `mysql.yml` `rusts.yml` `onlyoffice.yml` `cloudreve.yml` ，全部拷贝至目标内网计算机中，至此准备工作就全部完成啦，后续步骤全部在目标计算机中执行
+如按上述步骤执行，应有 **1** 个镜像包和 **4** 个配置文件 `apps.tar` `mysql.yml` `rustfs.yml` `onlyoffice.yml` `kodbox.yml` ，全部拷贝至目标内网计算机中，至此准备工作就全部完成啦，后续步骤全部在目标计算机中执行
