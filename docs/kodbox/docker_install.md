@@ -16,11 +16,11 @@
 
 ::: tip 已经作者测试的包
 
-分享名称: Docker 软件包
+分享名称: 内网Docker环境包
 
-分享链接: [https://online.j1net.com/#s/EB1sB93q](https://online.j1net.com/#s/EB1sB93q)
+分享链接: [https://www.checkone.j1net.com/#s/ECCnnfsa](https://www.checkone.j1net.com/#s/ECCnnfsa)
 
-提取密码: g915Y
+提取密码: EMiAs
 
 :::
 
